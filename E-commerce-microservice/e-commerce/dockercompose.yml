@@ -1,0 +1,194 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build:
+      context: ./src/apps/api-gateway
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src/apps/api-gateway:/app
+    depends_on:
+      - auth-service
+    networks:
+      - ecommerce-net
+
+  auth-service:
+    build:
+      context: ./src/apps/auth-service
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./src/apps/auth-service:/app
+    depends_on:
+      - mongo-auth
+    environment:
+      - MONGO_URI=mongodb://mongo-auth:27017/auth-db
+    networks:
+      - ecommerce-net
+
+  mongo-auth:
+    image: mongo:6
+    container_name: mongo-auth
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_auth_data:/data/db
+    networks:
+      - ecommerce-net
+
+  user-service:
+    build:
+      context: ./src/apps/user-service
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./src/apps/user-service:/app
+    depends_on:
+      - mongo-user
+    environment:
+      - MONGO_URI=mongodb://mongo-user:27017/user-db
+    networks:
+      - ecommerce-net
+
+  mongo-user:
+    image: mongo:6
+    container_name: mongo-user
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo_user_data:/data/db
+    networks:
+      - ecommerce-net
+
+  product-service:
+    build:
+      context: ./src/apps/product-service
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./src/apps/product-service:/app
+    depends_on:
+      - mongo-product
+    environment:
+      - MONGO_URI=mongodb://mongo-product:27017/product-db
+    networks:
+      - ecommerce-net
+
+  mongo-product:
+    image: mongo:6
+    container_name: mongo-product
+    ports:
+      - "27020:27017"
+    volumes:
+      - mongo_product_data:/data/db
+    networks:
+      - ecommerce-net
+
+  inventory-service:
+    build:
+      context: ./src/apps/inventory-service
+    ports:
+      - "3004:3004"
+    volumes:
+      - ./src/apps/inventory-service:/app
+    depends_on:
+      - mongo-inventory
+    environment:
+      - MONGO_URI=mongodb://mongo-inventory:27017/inventory-db
+    networks:
+      - ecommerce-net
+
+  mongo-inventory:
+    image: mongo:6
+    container_name: mongo-inventory
+    ports:
+      - "27021:27017"
+    volumes:
+      - mongo_inventory_data:/data/db
+    networks:
+      - ecommerce-net
+
+  order-service:
+    build:
+      context: ./src/apps/order-service
+    ports:
+      - "3005:3005"
+    volumes:
+      - ./src/apps/order-service:/app
+    depends_on:
+      - mongo-order
+    environment:
+      - MONGO_URI=mongodb://mongo-order:27017/order-db
+    networks:
+      - ecommerce-net
+
+  mongo-order:
+    image: mongo:6
+    container_name: mongo-order
+    ports:
+      - "27022:27017"
+    volumes:
+      - mongo_order_data:/data/db
+    networks:
+      - ecommerce-net
+
+  payment-service:
+    build:
+      context: ./src/apps/payment-service
+    ports:
+      - "3006:3006"
+    volumes:
+      - ./src/apps/payment-service:/app
+    depends_on:
+      - mongo-payment
+    environment:
+      - MONGO_URI=mongodb://mongo-payment:27017/payment-db
+    networks:
+      - ecommerce-net
+
+  mongo-payment:
+    image: mongo:6
+    container_name: mongo-payment
+    ports:
+      - "27023:27017"
+    volumes:
+      - mongo_payment_data:/data/db
+    networks:
+      - ecommerce-net
+
+  notification-service:
+    build:
+      context: ./src/apps/notification-service
+    ports:
+      - "3007:3007"
+    volumes:
+      - ./src/apps/notification-service:/app
+    depends_on:
+      - mongo-notification
+    environment:
+      - MONGO_URI=mongodb://mongo-notification:27017/notification-db
+    networks:
+      - ecommerce-net
+
+  mongo-notification:
+    image: mongo:6
+    container_name: mongo-notification
+    ports:
+      - "27024:27017"
+    volumes:
+      - mongo_notification_data:/data/db
+    networks:
+      - ecommerce-net
+
+volumes:
+  mongo_auth_data:
+  mongo_user_data:
+  mongo_product_data:
+  mongo_inventory_data:
+  mongo_order_data:
+  mongo_payment_data:
+  mongo_notification_data:
+
+networks:
+  ecommerce-net:
