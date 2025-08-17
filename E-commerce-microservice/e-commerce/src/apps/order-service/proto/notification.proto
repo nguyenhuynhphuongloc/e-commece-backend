@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package notification;
+
+service NotificationService {
+  rpc SendRegistrationEmail(RegistrationEmailRequest) returns (NotificationResponse);
+  rpc SendLoginEmail(LoginEmailRequest) returns (NotificationResponse);
+  rpc SendUserNotification(UserNotificationRequest) returns (NotificationResponse);
+}
+
+message RegistrationEmailRequest {
+  string email = 1;
+  string username = 2;
+}
+
+message LoginEmailRequest {
+  string email = 1;
+  string username = 2;
+  string loginTime = 3;   // ISO datetime string
+  string ipAddress = 4;
+}
+
+message UserNotificationRequest {
+  string userId = 1;       // ID người nhận
+  string title = 2;        // Tiêu đề thông báo
+  string content = 3;      // Nội dung chi tiết
+  string type = 4;         // Loại thông báo (e.g., "info", "warning", "alert")
+  string createdAt = 5;    // ISO datetime (client hoặc server tạo)
+}
+
+message NotificationResponse {
+  bool success = 1;
+  string message = 2;
+}

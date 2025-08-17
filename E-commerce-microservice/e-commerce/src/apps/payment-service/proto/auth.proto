@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService {
+  rpc Login(LoginRequest) returns (AuthResponse);
+  rpc Register(RegisterRequest) returns (AuthResponse);
+  rpc RefreshToken(RefreshRequest) returns (AuthResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+  rpc UpdateAccountType(UpdateAccountTypeRequest) returns (GenericResponse);
+  rpc CheckRole(CheckRoleRequest) returns (CheckRoleResponse);
+  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message RegisterRequest {
+  string name = 1;
+  string username = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message RefreshRequest {
+  string refreshToken = 1;
+}
+
+message LogoutRequest {
+  string refreshToken = 1;
+}
+
+message LogoutResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message UpdateAccountTypeRequest {
+  string userId = 1;
+  string accountType = 2; // "basic", "medium", "vip"
+}
+
+message CheckRoleRequest {
+  string userId = 1;
+}
+
+message CheckRoleResponse {
+  string role = 1;
+  bool isAdmin = 2;
+}
+
+message ChangePasswordRequest {
+  string userId = 1;
+  string oldPassword = 2;
+  string newPassword = 3;
+}
+
+message ChangePasswordResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message GenericResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message AuthResponse {
+  string accessToken = 1;
+  string refreshToken = 2;
+  string userId = 3;
+  string email = 4;
+  string name = 5;
+  string username = 6;
+  string role = 7;         // admin, client
+  string accountType = 8;  // basic, medium, vip
+}

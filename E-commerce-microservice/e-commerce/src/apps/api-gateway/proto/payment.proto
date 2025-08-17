@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package payment;
+
+service PaymentService {
+  // Tạo customer
+  rpc CreateCustomer(CreateCustomerRequest) returns (CustomerResponse);
+
+  // Tạo sản phẩm có defaultPrice
+  rpc CreateProduct(CreateProductRequest) returns (ProductResponse);
+
+  // Tạo link thanh toán từ danh sách sản phẩm
+  rpc CreatePaymentLink(CreatePaymentLinkRequest) returns (PaymentLinkResponse);
+}
+
+// === MESSAGE DEFINITIONS ===
+
+message CreateCustomerRequest {
+  string email = 1;
+  string name = 2;
+}
+
+message CustomerResponse {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+}
+
+message CreateProductRequest {
+  string name = 1;
+  string description = 2;
+  int32 unitAmount = 3;
+  string currency = 4;
+  string interval = 5;
+}
+
+message ProductResponse {
+  string id = 1;
+  string name = 2;
+  string defaultPriceId = 3;
+}
+
+message CreatePaymentLinkRequest {
+  string orderId = 1;
+  repeated LineItem items = 2;
+}
+
+message LineItem {
+  string productId = 1;
+  int32 quantity = 2;
+}
+
+message PaymentLinkResponse {
+  string url = 1;
+}

@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package product;
+
+service ProductService {
+  // Tạo sản phẩm mới
+  rpc CreateProduct(CreateProductRequest) returns (ProductResponse);
+
+  // Lấy chi tiết sản phẩm
+  rpc GetProductById(GetProductByIdRequest) returns (ProductResponse);
+
+  // Lấy danh sách sản phẩm theo danh mục (pagination)
+  rpc GetProductsByCategory(GetProductsByCategoryRequest) returns (ProductsResponse);
+
+  // Cập nhật thông tin sản phẩm
+  rpc UpdateProduct(UpdateProductRequest) returns (ProductResponse);
+
+  // Xoá sản phẩm
+  rpc DeleteProduct(DeleteProductRequest) returns (DeleteResponse);
+}
+
+// === MESSAGE DEFINITIONS ===
+
+message CreateProductRequest {
+  string name = 1;
+  string description = 2;
+  string categoryId = 3;
+  int32 price = 4; // tính theo cent
+  repeated string images = 5;
+  string status = 6; // active, inactive
+
+}
+
+message UpdateProductRequest {
+  string productId = 1;
+  string name = 2;
+  string description = 3;
+  string categoryId = 4;
+  int32 price = 5;
+  repeated string images = 6;
+  string status = 7;
+}
+
+message ProductResponse {
+  string productId = 1;
+  string name = 2;
+  string description = 3;
+  string categoryId = 4;
+  int32 price = 5;
+  repeated string images = 6;
+  string status = 7;
+  string createdAt = 8;
+}
+
+message GetProductByIdRequest {
+  string productId = 1;
+}
+
+message GetProductsByCategoryRequest {
+  string categoryId = 1;
+  int32 page = 2;
+  int32 limit = 3;
+}
+
+message ProductsResponse {
+  repeated ProductResponse products = 1;
+}
+
+message DeleteProductRequest {
+  string productId = 1;
+}
+
+message DeleteResponse {
+  string message = 1;
+}

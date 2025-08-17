@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package inventory;
+
+service InventoryService {
+  rpc AddInventory(AddInventoryRequest) returns (InventoryResponse);
+  rpc UpdateInventory(UpdateInventoryRequest) returns (InventoryResponse);
+  rpc GetInventoryByProductId(GetInventoryRequest) returns (InventoryResponse);
+  rpc DeleteInventory(DeleteInventoryRequest) returns (InventoryResponse);
+}
+
+message AddInventoryRequest {
+  string productId = 1;
+  int32 quantity = 2;
+}
+
+message UpdateInventoryRequest {
+  string productId = 1;
+  int32 quantity = 2;
+}
+
+message GetInventoryRequest {
+  string productId = 1;
+}
+
+message DeleteInventoryRequest {
+  string productId = 1;
+}
+
+message InventoryResponse {
+  string productId = 1;
+  int32 quantity = 2;
+}

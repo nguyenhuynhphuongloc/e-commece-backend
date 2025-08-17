@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package order;
+
+service OrderService {
+  // Tạo đơn hàng
+  rpc CreateOrder(CreateOrderRequest) returns (OrderResponse);
+
+  // Lấy thông tin đơn hàng theo ID
+  rpc GetOrderById(GetOrderByIdRequest) returns (OrderResponse);
+
+  // Cập nhật trạng thái đơn hàng
+  rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (OrderResponse);
+
+  // Lấy danh sách đơn hàng theo người dùng
+  rpc GetOrdersByUserId(GetOrdersByUserIdRequest) returns (OrdersResponse);
+}
+
+// === MESSAGE DEFINITIONS ===
+
+message CreateOrderRequest {
+  string userId = 1;
+  repeated OrderItem items = 2;
+  string note = 3;
+}
+
+message OrderItem {
+  string productId = 1;
+  int32 quantity = 2;
+}
+
+message OrderResponse {
+  string orderId = 1;
+  string userId = 2;
+  repeated OrderItem items = 3;
+  string status = 4; // pending | paid | failed | cancelled
+  string createdAt = 5;
+}
+
+message GetOrderByIdRequest {
+  string orderId = 1;
+}
+
+message UpdateOrderStatusRequest {
+  string orderId = 1;
+  string newStatus = 2; // paid, cancelled, etc.
+}
+
+message GetOrdersByUserIdRequest {
+  string userId = 1;
+}
+
+message OrdersResponse {
+  repeated OrderResponse orders = 1;
+}

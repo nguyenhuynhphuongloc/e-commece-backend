@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (UserResponse);
+  rpc FindByEmail(FindByEmailRequest) returns (UserResponse);
+  rpc FindByUsername(FindByUsernameRequest) returns (UserResponse);
+  rpc FindById(FindByIdRequest) returns (UserResponse);
+  rpc UpdateRole(UpdateRoleRequest) returns (GenericResponse);
+  rpc UpdatePassword(UpdatePasswordRequest) returns (GenericResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (GenericResponse);
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;   // hashed
+  string role = 4;       // default: "client"
+}
+
+message FindByEmailRequest {
+  string email = 1;
+}
+
+message FindByUsernameRequest {
+  string username = 1;
+}
+
+message FindByIdRequest {
+  string userId = 1;
+}
+
+message UpdateRoleRequest {
+  string userId = 1;
+  string newRole = 2;    // "admin", "client", etc.
+}
+
+message UpdatePasswordRequest {
+  string userId = 1;
+  string hashedPassword = 2;
+}
+
+message DeleteUserRequest {
+  string userId = 1;
+}
+
+message UserResponse {
+  string userId = 1;
+  string username = 2;
+  string email = 3;
+  string password = 4;   // hashed
+  string role = 5;
+}
+
+message GenericResponse {
+  bool success = 1;
+  string message = 2;
+}
