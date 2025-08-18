@@ -10,10 +10,14 @@ Author:
 Nguyễn Huỳnh Phương Lộc
 -------------------------------------------------------------------------------------------------------------------------------------------
 Technology Used
-Backend:
-Programming Language: TypeScript
-Framework: Nestjs
-DataBase: MongoDB
+
+- Backend:
+ 
+- Programming Language: TypeScript
+  
+- Framework: Nestjs
+
+- DataBase: MongoDB
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -21,110 +25,99 @@ Services Overview
 
 Auth Service
 
-User authentication (login/register/logout)
+- User authentication (login/register/logout)
 
-JWT token issuance & validation
+- JWT token issuance & validation
 
-Role-based access control (RBAC)
+- Role-based access control (RBAC)
 
 User Service
 
-Manage user profiles (CRUD)
+- Manage user profiles (CRUD)
 
-Update account information
+- Update account information
 
-Handle user preferences
+- Handle user preferences
 
 Notification Service
 
-Send email & in-app notifications
+- Send email & in-app notifications
 
-Handle order/payment updates
+- Handle order/payment updates
 
-Support asynchronous messaging
+- Support asynchronous messaging
 
- Inventory Service
+Inventory Service
 
-Manage stock levels for products
+- Manage stock levels for products
 
-Track product availability
+- Track product availability
 
-Synchronize stock after orders
+- Synchronize stock after orders
 
- Order Service
+Order Service
 
-Create and manage customer orders
+- Create and manage customer orders
 
-Track order status (pending, shipped, delivered)
+- Track order status (pending, shipped, delivered)
 
-Connect with Payment and Inventory services
+- Connect with Payment and Inventory services
 
- Payment Service
+Payment Service
 
-Handle payment processing
+- Handle payment processing
 
-Integrate with external payment (Stripe)
+- Integrate with external payment (Stripe)
 
-Store transaction history
+- Store transaction history
 
 Product Service
 
-Manage product catalog (CRUD)
+- Manage product catalog (CRUD)
 
-Store product details (name, price, description, category)
-
-Handle product images & metadata
+- Store product details (name, price, description, category)
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------
 Deployment: Docker 
 
 Main Libraries
 
-@nestjs/microservices – gRPC transport layer
++ @nestjs/microservices – gRPC transport layer
 
-@nestjs/jwt – JWT authentication
++ @nestjs/jwt – JWT authentication
 
-mongoose – MongoDB ODM
++ mongoose – MongoDB ODM
 
-class-validator & class-transformer – request validation
++ class-validator & class-transformer – request validation
 
-grpc-tools – protobuf generation
++ grpc-tools – protobuf generation
 
+-----------------------------------------------------------------------------------------------------------------------------------------------
 Main Functions
 
-Authentication & Authorization
++ Authentication & Authorization
 
-User Management
++ User Management
 
-Product Management
++ Product Management
 
-Inventory Tracking
++ Inventory Tracking
 
-Order Placement & Tracking
++ Order Placement & Tracking
 
-Payment Processing
++ Payment Processing
 
-Notification System
++ Notification System
 
-⚙Development Environment
+----------------------------------------------------------------------------------------------------------------------------------
+Development Environment
 
-Backend IDEs: Visual Studio Code, WebStorm
+- Backend IDEs: Visual Studio Code, WebStorm
 
-Database Tools: MongoDB Compass / Atlas
+- Database Tools: MongoDB Compass / Atlas
 
-Containerization: Docker
+- Containerization: Docker
 
-Local Deployment: Node.js v18+, Docker Compose
+- Local Deployment: Node.js v18+, Docker Compose
 
-Deployment Environment
-
-Runtime: Node.js + NestJS Microservices
-
-Service Communication: gRPC over HTTP/2
-
-Server: Dockerized microservices
-
-
-Payment Service → Notification Service
-
-Notify user after successful transaction
