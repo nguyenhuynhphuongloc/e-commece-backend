@@ -7,7 +7,7 @@ This project is an E-Commerce Platform designed using a Microservices Architectu
 Each service runs independently and communicates with others through gRPC for high-performance, low-latency inter-service communication.
 The system is built with NestJS and uses MongoDB as the database for storing application data.
 
-![HomePage](./design/usecase.png)
+![HomePage](./desgin/usecase.png)
 
 Author:
 Nguyễn Huỳnh Phương Lộc
