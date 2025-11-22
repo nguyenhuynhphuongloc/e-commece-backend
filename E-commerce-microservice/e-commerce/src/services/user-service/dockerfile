@@ -1,0 +1,16 @@
+FROM node:18
+
+WORKDIR /app
+
+# Chỉ copy package.json để cài đặt dependencies trong môi trường Linux của Docker
+COPY package*.json ./
+
+RUN npm install
+
+# Sau đó mới copy toàn bộ code
+COPY . .
+
+# Build nếu cần
+RUN npm run build
+
+CMD ["npm", "run", "start:dev"]
