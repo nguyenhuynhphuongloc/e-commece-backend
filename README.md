@@ -1,17 +1,19 @@
 Microservices E-Commerce Platform (NestJS + gRPC + MongoDB)
 ---------------------------------------------------------------------------------------------------------------------------------------
+
  Description:
 ---------------------------------------------------------------------------------------------------------------------------------------
 This project is an E-Commerce Platform designed using a Microservices Architecture.
 Each service runs independently and communicates with others through gRPC for high-performance, low-latency inter-service communication.
 The system is built with NestJS and uses MongoDB as the database for storing application data.
 
+![HomePage](./desgin/usecase.png)
+
 Author:
 Nguyễn Huỳnh Phương Lộc
 -----------------------------------------------------------------------------------------------------------------------------------------
 Technology Used
 
-- Backend:
  
 - Programming Language: TypeScript
   
